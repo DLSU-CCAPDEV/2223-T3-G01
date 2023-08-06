@@ -21,6 +21,8 @@ app.get('/', async(req, res) => {
     var store = await Store.find({})
     var cafe = await Cafe.find({})
     var gang = await Gang.find({})
+    var tahmee = await Tahmee.find({})
+
     let avg = 0;
       chicken.forEach((rev) => {
          avg += rev.rating;
@@ -89,11 +91,11 @@ app.get('/', async(req, res) => {
      }
     var pushStore = [];
     var storeHighRating = {
-      link:"./Tahmee",
+      link:"./store",
        rating:avg2,
-       image:"images/store/tahmee.jpg",
-       name:"Tahmee",
-       desc:"The first Double The Froyo Forever™ company in the Philippines.",
+       image:"images/store/elpoco.jpeg",
+       name:"El Poco",
+       desc:"The best and most authentic birria around town.Come and experience the greatest birria you\'ve ever tasted!",
        star:star3,
        emptyStar:emptyStar3
     }
@@ -125,31 +127,61 @@ app.get('/', async(req, res) => {
     } 
     pushCafe.push(cafeHighRating)
    // console.log(pushCafe) 
+
+
    let avg4 = 0;
-    gang.forEach((rev) => {
-        avg3 += rev.rating;
-      });
-   var totalRating3 = avg3 / gang.length;
-   var star4 = [];
-    var emptyStar4 = []
-    for (var i = 1; i <= totalRating3; i++ ) {
-        star4.push(i)
-    }
-    for (var i = star4.length + 1; i <= 5; i++ ) {
-            emptyStar4.push(i)
-    }
-    var pushGang = [];
-    var gangHighRating = {
-      link: "./ObscureCafe",
-       rating:avg3,
-       image:"images/store/obscurecafe.jpg",
-       name:"Obscure Cafe",
-       desc:"Would you like an Adventure now, or shall We have our coffee first?",
-       star:star4,
-       emptyStar:emptyStar4
-    } 
-    pushGang.push(gangHighRating)
-    var allData = [chickenHighRating,cheeseHighRating,storeHighRating,cafeHighRating, gangHighRating]
+   gang.forEach((rev) => {
+       avg4 += rev.rating;
+     });
+  var totalRating4 = avg4 / gang.length;
+  var star5 = [];
+   var emptyStar5 = []
+   for (var i = 1; i <= totalRating4; i++ ) {
+       star5.push(i)
+   }
+   for (var i = star5.length + 1; i <= 5; i++ ) {
+           emptyStar5.push(i)
+   }
+   var pushGang = [];
+   var gangHighRating = {
+     link: "./GangGangStore",
+      rating:avg4,
+      image:"images/store/ganggangchicken.jpg",
+      name:"Gang Gang Chicken",
+      desc:"Real taste, not just the sauce, boneless fried chicken.",
+      star:star5,
+      emptyStar:emptyStar5
+   } 
+   pushGang.push(gangHighRating)
+
+
+
+   let avg5 = 0;
+   tahmee.forEach((rev) => {
+       avg5 += rev.rating;
+     });
+  var totalRating5 = avg5 / tahmee.length;
+  var star6 = [];
+   var emptyStar6 = []
+   for (var i = 1; i <= totalRating5; i++ ) {
+       star6.push(i)
+   }
+   for (var i = star6.length + 1; i <= 5; i++ ) {
+           emptyStar6.push(i)
+   }
+   var pushTahmee = [];
+   var tahmeeHighRating = {
+     link: "./Tahmee",
+      rating:avg5,
+      image:"images/store/tahmee.jpg",
+      name:"Tahmee",
+      desc:"The first Double The Froyo Forever™ company in the Philippines.",
+      star:star6,
+      emptyStar:emptyStar6
+   } 
+   pushTahmee.push(tahmeeHighRating)
+
+    var allData = [chickenHighRating,cheeseHighRating,storeHighRating,cafeHighRating, gangHighRating, tahmeeHighRating]
 
     // Create a function to sort the arrays by rating.
     const sortByRating =  allData.sort((a, b) => b.rating - a.rating);
@@ -171,6 +203,8 @@ app.get('/Homepage', async(req, res) => {
     var cheese = await Cheese.find({})
     var store = await Store.find({})
     var cafe = await Cafe.find({})
+    var gang = await Gang.find({})
+    var tahmee = await Tahmee.find({})
 
     let avg = 0;
       chicken.forEach((rev) => {
@@ -245,11 +279,11 @@ app.get('/Homepage', async(req, res) => {
      }
     var pushStore = [];
     var storeHighRating = {
-      link:"./Tahmee",
+      link:"./store",
        rating:avg2,
-       image:"images/store/tahmee.jpg",
-       name:"Tahmee",
-       desc:"The first Double The Froyo Forever™ company in the Philippines.",
+       image:"images/store/elpoco.jpeg",
+       name:"El Poco Cantina",
+       desc:"The best and most authentic birria around town.Come and experience the greatest birria you\'ve ever tasted!",
        star:star3,
        emptyStar:emptyStar3
     }
@@ -283,7 +317,58 @@ app.get('/Homepage', async(req, res) => {
     pushCafe.push(cafeHighRating)
    // console.log(pushCafe) 
 
-    var allData = [chickenHighRating,cheeseHighRating,storeHighRating,cafeHighRating]
+   let avg4 = 0;
+   gang.forEach((rev) => {
+       avg4 += rev.rating;
+     });
+  var totalRating4 = avg4 / gang.length;
+  var star5 = [];
+   var emptyStar5 = []
+   for (var i = 1; i <= totalRating4; i++ ) {
+       star5.push(i)
+   }
+   for (var i = star5.length + 1; i <= 5; i++ ) {
+           emptyStar5.push(i)
+   }
+   var pushGang = [];
+   var gangHighRating = {
+     link: "./GangGangStore",
+      rating:avg4,
+      image:"images/store/ganggangchicken.jpg",
+      name:"Gang Gang Chicken",
+      desc:"Real taste, not just the sauce, boneless fried chicken.",
+      star:star5,
+      emptyStar:emptyStar5
+   } 
+   pushGang.push(gangHighRating)
+
+
+   let avg5 = 0;
+   cafe.forEach((rev) => {
+       avg5 += rev.rating;
+     });
+  var totalRating5 = avg5 / tahmee.length;
+  var star6 = [];
+   var emptyStar6 = []
+   for (var i = 1; i <= totalRating5; i++ ) {
+       star6.push(i)
+   }
+   for (var i = star6.length + 1; i <= 5; i++ ) {
+           emptyStar6.push(i)
+   }
+   var pushTahmee = [];
+   var tahmeeHighRating = {
+     link: "./Tahmee",
+      rating:avg5,
+      image:"images/store/tahmee.jpg",
+      name:"Tahmee",
+      desc:"The first Double The Froyo Forever™ company in the Philippines.",
+      star:star6,
+      emptyStar:emptyStar6
+   } 
+   pushTahmee.push(tahmeeHighRating)
+
+    var allData = [chickenHighRating,cheeseHighRating,storeHighRating,cafeHighRating, gangHighRating, tahmeeHighRating]
 
     // Create a function to sort the arrays by rating.
     const sortByRating =  allData.sort((a, b) => b.rating - a.rating);
@@ -1116,6 +1201,4 @@ app.get('/AboutPage', async(req, res) => {
       res.render('AboutPage');
   }
 });
-
-
 module.exports = app;
