@@ -376,7 +376,7 @@
     </div>
 
     <div id="establishments">
-        <h1 style="margin: auto; padding: 30px;"> Most Reviewed Restaurants </h1>
+        <h1 style="margin: auto; padding: 30px;"> Recommended Restaurants </h1>
         <div id="containers">
            {{#each sortByRating}}
             <div class="mostreviewed">
@@ -386,14 +386,7 @@
                     <a href="/{{link}}">
                     <h2 id="restaurantname"> {{name}} </h2>
                     <h3 class="restaurantdesc">{{desc}}</h3>
-                    <div class="star-container">
-                         {{#each star}}
-                              <span class="fa fa-star" style = "color: orange;"></span>
-                           {{/each}}
-                           {{#each emptyStar}}
-                              <span class="fa fa-star-o" style = "color: orange;"></span>
-                           {{/each}}<p>({{rating}})</p>
-                    </div>
+                    
                     </a>
 
                 </div>
@@ -407,15 +400,7 @@
                     <a href="GangGangStore">
                     <h2 id="restaurantname"> Gang Gang Chicken </h2>
                     <h3 class="restaurantdesc"> Real taste, not just the sauce, boneless fried chicken. </h3>
-                    <div class="star-container">
-                        <i class="fa fa-star"></i>
-                        <span class="fa fa-star-o" style = "color: orange;"></span>
-                        <span class="fa fa-star-o" style = "color: orange;"></span>
-                        <span class="fa fa-star-o" style = "color: orange;"></span>
-                        <span class="fa fa-star-o" style = "color: orange;"></span>
-                        <p>(3)</p>
-
-                    </div>
+                    
                     </a>
                 </div>
             </div>

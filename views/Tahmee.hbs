@@ -6,8 +6,39 @@
   <link href="images/logo.png" rel="shortcut icon" />
   <link href="nav.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+ a {
+            color: #0254EB
+        }
+        a:visited {
+            color: #0254EB
+        }
+        a.morelink {
+            text-decoration:none;
+            outline: none;
+        }
+        .morecontent span {
+            display: none;
+        }
+        .comment {
+            width: 800px;
+            margin: 10px;
+             text-align: justify;
+            
+        }
+        .comment1 {
+            width: 700px;
+            margin: 10px;
+             text-align: justify;
+
+        }
+</style>
 <body>
 <header class="header">
     <script src = "loginscript.js"></script>
@@ -261,7 +292,7 @@
         </div>
     </div>
 
-    <div class="comment-thread card-body shadow-sm p-5 col-lg-9 mx-auto" style="margin-top: 10%;">
+     <div class="comment-thread card-body shadow-sm p-5 col-lg-9 mx-auto" style="margin-top: 10%;">
         <div class="card">
           <div class="card-body">
             <h4 class="font-italic mb-4">Post a Review</h4>
@@ -270,13 +301,27 @@
 		  
           <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
             <div class="d-flex flex-start w-100">
-              <img class="rounded-circle shadow-1-strong me-3" src="images/lsleats.png" alt=" " width="35" height="35" />
+                {{#if profile.image}}
+                 <img class="rounded-circle shadow-1-strong me-3" src="/{{profile.image}}" alt=" " width="35" height="35" />
+                {{/if}}
               <div class="form-outline w-100" style="margin-left:10px;">
                 
 				{{#if user}}
-			<form id="submission" action="/tahmeesubmit_comment" method="post">
+			<form id="submission" action="/Tahmee/Tahmeesubmit_comment" method="post" enctype="multipart/form-data">
+                <input type = "text"  class="form-control" id = "post-title" name = "postTitle" placeholder = "Title">
                 <textarea class="form-control" id="textAreaExample" name="comment" rows="4" style="background: #fff;" placeholder="Reply here..."></textarea>
-                <input type="file" id="myImage" name="myImage" accept="image/png, image/gif, image/jpeg" style="margin-bottom: 10px; margin-top: 10px;">
+                <input type="file" name="image" style="margin-bottom: 10px; margin-top: 10px;">
+
+                <div>
+                <label style="text-align: left; margin-left: 8px">Rating </label>
+                    <select name="rating" style="width: 100px" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
                 <br>
 
                 <span class="float-end mt-2 pt-1">
@@ -293,121 +338,169 @@
 		   
 			<br>
 			<h5 class="font-italic mb-4">Reviews</h5>
-            
+            {{#each data}}
+
 			<div class = "user_post">
 				
-				<img class="rounded-circle shadow-1-strong me-3" src="images/UserProfile/user01icon.jpg" width = 50 height = 50>
+			  {{#if image}}
+                    <img src="/{{image}}" class="icon" style="a:hover { border-radius: #2F3B1C solid 4px;}">
+                    </a>
+              {{else}}
+            <img src="./images/defaulticon.png " class="icon" style="a:hover { border-radius: #2F3B1C solid 4px;}">
+            </a>
+            {{/if}}
 				<div style = "margin-left: 10px ;">
-					<a href = "user.html"><h6 class="fw-bold mb-1 me-3" style = "color: seagreen;">Sabrina Carpenter</h6></a>
-					<p class="text-muted small mb-0"> 2/5
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span>
-					</p>
-													
-					<p class="mt-3 mb-4 pb-2">
-						Compared to other froyo, it’s a bit expensive. The taste is nothing special, just like the normal froyo. Also when we went there, the froyo melts really quick.
-					</p>
+					<a href = "sunghoon.html"><h6 class="fw-bold mb-1 me-3" style = "color: seagreen;">{{username}}</h6></a>
+                     <div class="small d-flex justify-content-start" style="float: right;">
+                        <a href="/Tahmee/edit/{{id}}" class = "btn"><i class="fa fa-edit"></i></a>
+                        <a href="/Tahmee/delete/{{id}}" class = "btn"><i class="fa fa-remove"></i>
+                            </a>
+                            
+                        </div>
+                         {{#if rating}}
+                              <p class="text-muted small mb-0"> {{rating}}/5
+                            {{else}}
+                              <p class="text-muted small mb-0"> 0/5</p>
+                            {{/if}}
+
+                           {{#each star1}}
+                              <span class="fa fa-star" style = "color: orange;"></span>
+                           {{/each}}
+                           {{#each emptyStar1}}
+                              <span class="fa fa-star-o" style = "color: orange;"></span>
+                           {{/each}}
+                            
+                           
+                           
+					<h6>{{title}}</h6>
+                    {{#if commentFile}}
+                           <img src="/{{commentFile}}" style="width: 200px;height: 100px">
+                        {{else}}
+                        {{/if}}		 						
+                        
+                        {{#if paragraphLength}}
+                           <div class="comment more"> {{content}}</div>
+                         {{else}}
+                          <div class="comment"> {{content}}</div>
+                         {{/if}}
+                   
 
 					<div class="small d-flex justify-content-start">
 						<a href="#!" class="d-flex align-items-center me-3">
 						<p class="mb-0 d-flex align-items-center me-3" style = "color: black;"> Helpful? </p></a>
-						<button class = "btn"><i class="fa fa-thumbs-up"></i> 30</button>
-						<button class = "btn"><i class="fa fa-thumbs-up fa-rotate-180"></i> 58</button>
+						<form action="/Tahmee/like/{{id}}" method="post">
+                            <button type="submit" class = "btn" ><i class="fa fa-thumbs-up"></i> {{likes.length}} </button>
+                        </form>
+                        <form action="/Tahmee/dislike/{{id}}" method="post">
+                            <button type="submit" class = "btn" ><i class="fa fa-thumbs-up fa-rotate-180"></i> {{dislikes.length}} </button>
+                            
+                        </form>
 					</div>
+                      <button type="button" class="btn edit" style = " white-space:nowrap; float: right;"      data-toggle="modal" data-target="#item1-{{id}}">
+                               <i class="fa fa-edit"></i>
+                     </button>
 				</div>
-			</div>
-						
+			</div>	
+            {{#each reviewss}}
+
+              <div class = "reply" style ="margin-left:100px; display:flex; flex-direction:row">
+                 {{#if image}}
+                    <img src="/{{image}}" width = 50 height = 50 class="rounded-circle shadow-1-strong me-3">
+                 {{else}}
+                     <img src="./images/defaulticon.png " class="rounded-circle shadow-1-strong me-3"  width = 50 height = 50>
+                 {{/if}}
+                <div style = "margin-left: 10px ;">
+                  <a href = "user.html"><h6 style = "color: seagreen; font-size:16px; display:flex; margin-top:10px;">{{username}}</h6></a>
+                        {{#if uploadImage}}
+                           <img src="/{{uploadImage}}" style="width: 200px;height: 100px">
+                        {{else}}
+                        {{/if}}
+                
+                 <div class="comment1 more"> {{review}}</div>
+
+                </div>
+              </div>
+            {{/each}}
+
+               <!-- Modal -->
+      <div class="modal fade" id="item1-{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">            
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/Tahmee/add/tahmee-review" style="margin-top: -32px" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+               
+            <input type="hidden" class="form-control" value="{{id}}"  name="commentId" style="background: #fff;"><br>
+            <textarea type="text" rows="5" class="form-control"  name="replay" style="background: #fff;" placeholder="Reply here..."></textarea>
+            <br>
+            <input type="file" class="form-control"  name="image" style="background: #fff;">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+
+            <hr>			
+                 {{/each}}      
       
-      <br><div class = "user_post">
-				
-				<img class="rounded-circle shadow-1-strong me-3" src="images/UserProfile/jakesim.jpg" width = 50 height = 50>
-				<div style = "margin-left: 10px ;">
-					<a href = "jake.html"><h6 class="fw-bold mb-1 me-3" style = "color: seagreen;">Jake Sim</h6></a>
-					<p class="text-muted small mb-0"> 4/5
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star"></span>
-					</p>
-													
-					<p class="mt-3 mb-4 pb-2">
-						I love it! Been craving froyo in in taft and surely, this one satisfy my desire for froyo! 
-					</p>
-
-					<div class="small d-flex justify-content-start">
-						<a href="#!" class="d-flex align-items-center me-3">
-						<p class="mb-0 d-flex align-items-center me-3" style = "color: black;"> Helpful? </p></a>
-						<button class = "btn"><i class="fa fa-thumbs-up"></i> 97</button>
-						<button class = "btn"><i class="fa fa-thumbs-up fa-rotate-180"></i> 36</button>
-					</div>
-				</div>
-			</div>
-			<br>
-
-        <div class = "user_post">
-				
-				<img class="rounded-circle shadow-1-strong me-3" src="images/UserProfile/jennifer.jpg" width = 50 height = 50>
-				<div style = "margin-left: 10px ;">
-					<a href = "jennifer.html"><h6 class="fw-bold mb-1 me-3" style = "color: seagreen;">Jennifer Huh</h6></a>
-					<p class="text-muted small mb-0"> 4/5
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star"></span>
-					</p>
-													
-					<p class="mt-3 mb-4 pb-2">
-                        Sakto lang. Tastes like froyo. My favorite sauce is always ubos 😣
-					</p>
-
-					<div class="small d-flex justify-content-start">
-						<a href="#!" class="d-flex align-items-center me-3">
-						<p class="mb-0 d-flex align-items-center me-3" style = "color: black;"> Helpful? </p></a>
-						<button class = "btn"><i class="fa fa-thumbs-up"></i> 47</button>
-						<button class = "btn"><i class="fa fa-thumbs-up fa-rotate-180"></i> 16</button>
-					</div>
-				</div>
-			</div>
-			<br>					
-			<div class = "user_post">
-				
-				<img class="rounded-circle shadow-1-strong me-3" src="./images/defaulticon.png" width = 50 height = 50>
-				<div style = "margin-left: 10px ;">
-					<a href = "User"><h6 class="fw-bold mb-1 me-3" style = "color: seagreen;">{{user}}</h6></a>
-					<p class="text-muted small mb-0"> 4/5
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star" style = "color: orange;"></span>
-						<span class="fa fa-star"></span>
-					</p>
-													
-					<p class="mt-3 mb-4 pb-2">
-						{{comment}} 
-					</p>
-
-					<div class="small d-flex justify-content-start">
-						<a href="#!" class="d-flex align-items-center me-3">
-						<p class="mb-0 d-flex align-items-center me-3" style = "color: black;"> Helpful? </p></a>
-						<button class = "btn"><i class="fa fa-thumbs-up"></i> 70</button>
-						<button class = "btn"><i class="fa fa-thumbs-up fa-rotate-180"></i> 3</button>
-					</div>
-				</div>
+      <br>
 			</div>
           </div>
         </div>
 	</div>
-    </section>
+</section>  
 </div>
 <script src="jquery.min.js"></script>
 <script src="bootstrap.bundle.min.js"></script>
 <script src="nav.js"></script>
 
+
+<script>
+$(document).ready(function() {
+            var showChar = 400;
+            var ellipsestext = "...";
+            var moretext = "More";
+            var lesstext = "Less";
+            $('.more').each(function() {
+                var content = $(this).html();
+
+                if(content.length > showChar) {
+
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar-1, content.length - showChar);
+
+                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                    $(this).html(html);
+                }
+
+            });
+
+            $(".morelink").click(function(){
+                if($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).parent().prev().toggle();
+                $(this).prev().toggle();
+                return false;
+            });
+        });
+
+
+</script>
+
 </body>
-
-
